@@ -1,7 +1,7 @@
 package com.pollfish.server.config;
 
 import com.pollfish.core.LoggingService;
-import com.pollfish.server.handler.LoggingHandler;
+import com.pollfish.server.service.LoggingHandler;
 import org.apache.thrift.server.TServer;
 import org.apache.thrift.server.TSimpleServer;
 import org.apache.thrift.transport.TServerSocket;

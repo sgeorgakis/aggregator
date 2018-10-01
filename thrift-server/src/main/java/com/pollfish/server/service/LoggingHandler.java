@@ -1,4 +1,4 @@
-package com.pollfish.server.handler;
+package com.pollfish.server.service;
 
 import com.pollfish.core.LoggingEvent;
 import com.pollfish.core.LoggingService;
@@ -11,8 +11,15 @@ public class LoggingHandler implements LoggingService.Iface {
 
     private static final Logger LOG = LoggerFactory.getLogger(LoggingHandler.class);
 
+    private final StreamService streamService;
+
+    public LoggingHandler(StreamService streamService) {
+        this.streamService = streamService;
+    }
+
     @Override
     public void pushLoggingEvent(LoggingEvent event) {
         LOG.info("{}", event);
+        streamService.forwardLoggingEvent(event);
     }
 }

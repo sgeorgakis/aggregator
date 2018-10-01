@@ -1,6 +1,9 @@
 spring:
   application:
     name: thrift-server
+  kafka:
+    consumer.group-id: logging-event
+    bootstrap-servers: kafka:9092
   main:
     web-environment: false
 
@@ -14,3 +17,5 @@ info:
 application:
   server:
     port: 9090
+  kafka:
+    topic: logging
