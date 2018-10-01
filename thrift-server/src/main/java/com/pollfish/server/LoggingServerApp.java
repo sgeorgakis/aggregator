@@ -1,6 +1,6 @@
-package com.pollfish.client;
+package com.pollfish.server;
 
-import com.pollfish.client.config.ApplicationProperties;
+import com.pollfish.server.config.ApplicationProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -11,12 +11,13 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @ComponentScan
 @EnableConfigurationProperties({ApplicationProperties.class})
-public class LoggingClientApp {
+public class LoggingServerApp {
 
-    private static final Logger LOG = LoggerFactory.getLogger(LoggingClientApp.class);
+    private static final Logger LOG = LoggerFactory.getLogger(LoggingServerApp.class);
 
     public static void main(String[] args) {
         LOG.info("Starting LoggingClient");
-        SpringApplication.run(LoggingClientApp.class, args);
+        SpringApplication.run(LoggingServerApp.class, args);
     }
 }
+
