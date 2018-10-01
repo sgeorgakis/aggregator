@@ -1,4 +1,4 @@
-package com.pollfish.client;
+package com.pollfish.client.domain;
 
 import com.pollfish.client.util.RandomEventUtil;
 import com.pollfish.core.LoggingService;
@@ -6,17 +6,17 @@ import org.apache.thrift.TException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
-public class EventGenerator extends Thread implements KeyListener {
+public class EventGenerator extends Thread {
 
     private static final Logger LOG = LoggerFactory.getLogger(EventGenerator.class);
-    private boolean shouldRun;
-    private LoggingService.Client client;
+    private final LoggingService.Client client;
+    private int interval;
 
-    public EventGenerator(LoggingService.Client client) {
+    private boolean shouldRun;
+
+    public EventGenerator(LoggingService.Client client, int interval) {
         this.client = client;
+        this.interval = interval;
         this.shouldRun = true;
     }
 
@@ -24,7 +24,7 @@ public class EventGenerator extends Thread implements KeyListener {
         try {
             while (shouldRun) {
                 client.pushLoggingEvent(RandomEventUtil.generateRandomEventUtil());
-                Thread.sleep(500L);
+                Thread.sleep(interval);
             }
         } catch (InterruptedException e) {
             LOG.error("Thread interrupted");
@@ -37,17 +37,11 @@ public class EventGenerator extends Thread implements KeyListener {
         }
     }
 
-
-    @Override
-    public void keyTyped(KeyEvent event) {
+    public void setShouldRun(boolean shouldRun) {
+        this.shouldRun = shouldRun;
     }
 
-    @Override
-    public void keyPressed(KeyEvent event) {
-        this.shouldRun = false;
-    }
-
-    @Override
-    public void keyReleased(KeyEvent event) {
+    public boolean shouldRun() {
+        return shouldRun;
     }
 }

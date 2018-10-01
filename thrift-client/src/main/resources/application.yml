@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: logging-client
+  main:
+    web-environment: false
+
+info:
+  project:
+    version: #project.version#
+
+#===============================================
+# Application specific properties
+#===============================================
+application:
+  server:
+    ip: localhost
+    port: 9090
+  interval: 500
