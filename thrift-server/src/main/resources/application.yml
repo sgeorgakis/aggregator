@@ -3,7 +3,7 @@ spring:
     name: thrift-server
   kafka:
     consumer.group-id: logging-event
-    bootstrap-servers: kafka:9092
+    bootstrap-servers: localhost:9092
   main:
     web-environment: false
 
