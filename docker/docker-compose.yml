@@ -2,7 +2,7 @@ version: '3'
 
 services:
   zookeeper:
-    image: confluentinc/cp-zookeeper:4.1.0
+    image: confluentinc/cp-zookeeper:latest
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
     networks:
@@ -10,11 +10,11 @@ services:
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:2181"]
       interval: 30s
-      timeout: 10s
+      timeout: 20s
       retries: 5
 
   kafka:
-    image: confluentinc/cp-kafka:4.1.0
+    image: confluentinc/cp-kafka:latest
     environment:
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
@@ -26,15 +26,10 @@ services:
     depends_on:
       - zookeeper
 
-  cassandra:
-    image: cassandra:latest
-    ports:
-      - "9042:9042"
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9042"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
+#  cassandra:
+#    image: cassandra:latest
+#    ports:
+#      - "9042:9042"
 
 networks:
   kafka:

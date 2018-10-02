@@ -2,8 +2,8 @@ spring:
   application:
     name: kafka-consumer
   kafka:
-    consumer.group-id: logging-event
     bootstrap-servers: localhost:9092
+    consumer.group-id: logging-event
 
 info:
   project:
