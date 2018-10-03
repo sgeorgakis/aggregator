@@ -1,5 +1,6 @@
 package com.pollfish.consumer.domain;
 
+import com.datastax.driver.mapping.annotations.ClusteringColumn;
 import com.datastax.driver.mapping.annotations.Column;
 import com.datastax.driver.mapping.annotations.PartitionKey;
 import com.datastax.driver.mapping.annotations.Table;
@@ -19,9 +20,10 @@ public class LoggingEvent {
     @PartitionKey(2)
     private String level;
 
-    @PartitionKey
+    @ClusteringColumn
     private String id;
 
+    @Column(name = "date_created")
     private Date dateCreated;
 
     private String message;

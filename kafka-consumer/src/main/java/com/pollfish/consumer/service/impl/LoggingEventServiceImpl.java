@@ -10,12 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-
-import static com.pollfish.consumer.config.Constants.DATE_PARTITION_FORMAT;
 
 @Service
 public class LoggingEventServiceImpl implements LoggingEventService {
@@ -25,12 +20,9 @@ public class LoggingEventServiceImpl implements LoggingEventService {
     private final LoggingEventRepository repository;
     private final LoggingEventMapper mapper;
 
-    private DateFormat dateFormat;
-
     public LoggingEventServiceImpl(LoggingEventRepository repository, LoggingEventMapper mapper) {
         this.repository = repository;
         this.mapper = mapper;
-        this.dateFormat = new SimpleDateFormat(DATE_PARTITION_FORMAT);
     }
 
     @Override
@@ -47,8 +39,7 @@ public class LoggingEventServiceImpl implements LoggingEventService {
     }
 
     @Override
-    public List<LoggingEventDTO> findByDateAndAppAndLevel(Date date, int app, LevelType level) {
-        String datePartition = dateFormat.format(date);
-        return mapper.toDto(repository.findByDatePartitionAndAppAndLevel(datePartition, app, level.name()));
+    public List<LoggingEventDTO> findByDayAndAppAndLevel(String date, int app, LevelType level) {
+        return mapper.toDto(repository.findByDatePartitionAndAppAndLevel(date, app, level.name()));
     }
 }

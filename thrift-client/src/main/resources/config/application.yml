@@ -1,12 +1,12 @@
+info:
+  project:
+    version: #project.version#
+
 spring:
   application:
     name: thrift-client
   main:
     web-environment: false
-
-info:
-  project:
-    version: #project.version#
 
 #===============================================
 # Application specific properties

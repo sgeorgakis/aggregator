@@ -2,8 +2,9 @@ package com.pollfish.consumer.service.mapper;
 
 import com.pollfish.consumer.domain.LoggingEvent;
 import com.pollfish.consumer.service.dto.LoggingEventDTO;
+import com.pollfish.consumer.web.rest.vm.LoggingEventVM;
 import org.mapstruct.AfterMapping;
-import org.mapstruct.InheritConfiguration;
+import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -19,23 +20,24 @@ public interface LoggingEventMapper {
     @Mapping(target = "datePartition", ignore = true)
     LoggingEvent toEntity(LoggingEventDTO dto);
 
-    @InheritConfiguration
+    @InheritInverseConfiguration(name = "toEntity")
     LoggingEventDTO toDto(LoggingEvent entity);
+
+    LoggingEventVM toVm(LoggingEventDTO dto);
+
+    LoggingEventDTO toDto(LoggingEventVM vm);
 
     List<LoggingEvent> toEntity(List<LoggingEventDTO> dto);
 
     List<LoggingEventDTO> toDto(List<LoggingEvent> entity);
 
+    List<LoggingEventVM> toVm(List<LoggingEventDTO> dto);
+
+    List<LoggingEventDTO> toDtoList(List<LoggingEventVM> vm);
+
     @AfterMapping
     default void mapToEntity(@MappingTarget LoggingEvent entity, LoggingEventDTO dto) {
-        DateFormat dateFormat = new SimpleDateFormat("yyyyMMDD");
+        DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
         entity.setDatePartition(dateFormat.format(dto.getTime()));
     }
-
-//
-//    @AfterMapping
-//    default void mapToDto(@MappingTarget LoggingEventDTO dto, LoggingEvent entity) {
-//        entity.setLevel(dto.getLevel().toString());
-//        dto.getLevel().name()
-//    }
 }
