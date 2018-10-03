@@ -17,6 +17,10 @@ public class ApplicationProperties {
         return interval;
     }
 
+    public void setInterval(int interval) {
+        this.interval = interval;
+    }
+
     public static class Server {
 
         private String ip = "localhost";

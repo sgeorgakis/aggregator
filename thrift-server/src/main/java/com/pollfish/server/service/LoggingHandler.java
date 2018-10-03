@@ -19,7 +19,6 @@ public class LoggingHandler implements LoggingService.Iface {
 
     @Override
     public void pushLoggingEvent(LoggingEvent event) {
-        LOG.info("{}", event);
         streamService.forwardLoggingEvent(event);
     }
 }

@@ -8,11 +8,15 @@
     <packaging>jar</packaging>
     <name>core</name>
 
+    <properties>
+        <checkstyle.configuration.path>../cs/checkstyle.xml</checkstyle.configuration.path>
+    </properties>
+
     <parent>
         <groupId>com.pollfish</groupId>
         <artifactId>aggregator</artifactId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath>../parent/pom.xml</relativePath>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <dependencies>

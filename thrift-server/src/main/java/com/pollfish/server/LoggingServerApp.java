@@ -16,7 +16,7 @@ public class LoggingServerApp {
     private static final Logger LOG = LoggerFactory.getLogger(LoggingServerApp.class);
 
     public static void main(String[] args) {
-        LOG.info("Starting LoggingClient");
+        LOG.info("Starting LoggingServer");
         SpringApplication.run(LoggingServerApp.class, args);
     }
 }

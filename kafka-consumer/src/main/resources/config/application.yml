@@ -1,6 +1,12 @@
 spring:
   application:
     name: kafka-consumer
+  data:
+    cassandra:
+      contactPoints: localhost
+      protocolVersion: V4
+      compression: LZ4
+      keyspaceName: logging
   kafka:
     bootstrap-servers: localhost:9092
     consumer.group-id: logging-event

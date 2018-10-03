@@ -25,6 +25,7 @@ public class RandomEventUtil {
      */
     public static LoggingEvent generateRandomEventUtil() {
         LoggingEvent event = new LoggingEvent();
+        event.setId(UUID.randomUUID().toString());
         event.setTime(dateFormat.format(new Date()));
         event.setM(UUID.randomUUID().toString());
         event.setLevel(randomEnum(LevelType.class));

@@ -2,34 +2,40 @@ version: '3'
 
 services:
   zookeeper:
-    image: confluentinc/cp-zookeeper:latest
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-    networks:
-      - kafka
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:2181"]
-      interval: 30s
-      timeout: 20s
-      retries: 5
-
-  kafka:
-    image: confluentinc/cp-kafka:latest
-    environment:
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    image: library/zookeeper:latest
+#    networks:
+#      - kafka
     ports:
-       - "9092:9092"
-    networks:
-      - kafka
-    depends_on:
-      - zookeeper
+      - '2181:2181'
+#    environment:
+#      ALLOW_ANONYMOUS_LOGIN: 'yes'
+#    healthcheck:
+#      test: ["CMD", "curl", "-f", "http://localhost:2181"]
+#      interval: 30s
+#      timeout: 20s
+#      retries: 5
 
-#  cassandra:
-#    image: cassandra:latest
+#  kafka:
+#    image: bitnami/kafka:latest
+#    environment:
+#      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+#      ALLOW_PLAINTEXT_LISTENER: 'yes'
+#      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+#      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 #    ports:
-#      - "9042:9042"
+#       - "9092:9092"
+#    networks:
+#      - kafka
+#    depends_on:
+#      - zookeeper
 
-networks:
-  kafka:
+  cassandra:
+    build:
+      context: ./cassandra
+      dockerfile: Dockerfile
+    ports:
+      - '9042:9042'
+    command: "sh /opt/init-database.sh"
+
+#networks:
+#  kafka:

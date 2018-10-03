@@ -1,30 +1,42 @@
-package com.pollfish.client.domain;
+package com.pollfish.client.service.impl;
 
+import com.pollfish.client.config.ApplicationProperties;
+import com.pollfish.client.service.LoggingEventGenerationService;
 import com.pollfish.client.util.RandomEventUtil;
 import com.pollfish.core.LoggingService;
 import org.apache.thrift.TException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
-public class EventGenerator extends Thread {
+import javax.annotation.PreDestroy;
 
-    private static final Logger LOG = LoggerFactory.getLogger(EventGenerator.class);
+@Service
+public class RandomEventGenerationServiceImpl extends Thread implements LoggingEventGenerationService {
+
+    private static final Logger LOG = LoggerFactory.getLogger(RandomEventGenerationServiceImpl.class);
+
     private final LoggingService.Client client;
-    private int interval;
+    private final ApplicationProperties applicationProperties;
 
     private boolean shouldRun;
 
-    public EventGenerator(LoggingService.Client client, int interval) {
+    public RandomEventGenerationServiceImpl(LoggingService.Client client, ApplicationProperties applicationProperties) {
         this.client = client;
-        this.interval = interval;
+        this.applicationProperties = applicationProperties;
         this.shouldRun = true;
+    }
+
+    @Override
+    public void sendEvents() {
+        this.start();
     }
 
     public void run() {
         try {
             while (shouldRun) {
                 client.pushLoggingEvent(RandomEventUtil.generateRandomEventUtil());
-                Thread.sleep(interval);
+                Thread.sleep(applicationProperties.getInterval());
             }
         } catch (InterruptedException e) {
             LOG.error("Thread interrupted");
@@ -43,5 +55,10 @@ public class EventGenerator extends Thread {
 
     public boolean shouldRun() {
         return shouldRun;
+    }
+
+    @PreDestroy
+    public void onDestroy() {
+        setShouldRun(false);
     }
 }

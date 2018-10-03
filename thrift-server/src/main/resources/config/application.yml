@@ -3,6 +3,8 @@ spring:
     name: thrift-server
   kafka:
     bootstrap-servers: localhost:9092
+    producer:
+      batchSize: 3
   main:
     web-environment: false
 
