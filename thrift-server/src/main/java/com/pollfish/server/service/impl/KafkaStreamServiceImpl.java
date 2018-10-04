@@ -38,12 +38,11 @@ public class KafkaStreamServiceImpl implements StreamService {
     public void forwardLoggingEvent(LoggingEvent event) {
         try {
             String message = mapper.writeValueAsString(event);
-            LOG.debug("Topic: {}, Message: {}", applicationProperties.getKafka().getTopic(), message);
             ListenableFuture<SendResult<String, String>> result = kafkaTemplate.send(applicationProperties.getKafka().getTopic(), message);
             result.addCallback(new ListenableFutureCallback<SendResult<String, String>>() {
                 @Override
                 public void onSuccess(SendResult<String, String> result) {
-                    LOG.debug("Message was sent");
+                    LOG.info("Message was sent");
                 }
 
                 @Override

@@ -51,7 +51,7 @@ public class LoggingEventServiceImpl implements LoggingEventService {
     /**
      * Find {@link LoggingEventDTO} objects according to date, app and level
      *
-     * @param date the date (yyyMMdd format)
+     * @param date the date in yyyyMMdd format
      * @param app the app generated the {@link LoggingEventDTO}
      * @param level the logging level of the event
      * @return a list containing the {@link LoggingEventDTO} objects

@@ -23,7 +23,7 @@ public class RandomEventUtil {
      *
      * @return the generated {@link LoggingEvent} object
      */
-    public static LoggingEvent generateRandomEventUtil() {
+    public static LoggingEvent generateRandomEvent() {
         LoggingEvent event = new LoggingEvent();
         event.setId(UUID.randomUUID().toString());
         event.setTime(dateFormat.format(new Date()));

@@ -3,6 +3,7 @@ package com.pollfish.client.service.impl;
 import com.pollfish.client.config.ApplicationProperties;
 import com.pollfish.client.service.LoggingEventGenerationService;
 import com.pollfish.client.util.RandomEventUtil;
+import com.pollfish.core.LoggingEvent;
 import com.pollfish.core.LoggingService;
 import org.apache.thrift.TException;
 import org.slf4j.Logger;
@@ -42,7 +43,9 @@ public class RandomEventGenerationServiceImpl extends Thread implements LoggingE
     public void run() {
         try {
             while (shouldRun) {
-                client.pushLoggingEvent(RandomEventUtil.generateRandomEventUtil());
+                LoggingEvent event = RandomEventUtil.generateRandomEvent();
+                client.pushLoggingEvent(event);
+                LOG.info("Sent event to server: {}", event);
                 Thread.sleep(applicationProperties.getInterval());
             }
         } catch (InterruptedException e) {
