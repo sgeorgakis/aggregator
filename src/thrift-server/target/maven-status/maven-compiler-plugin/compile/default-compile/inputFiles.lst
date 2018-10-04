@@ -1,7 +1,0 @@
-/home/cassandra/Downloads/aggregator/src/thrift-server/src/main/java/com/pollfish/server/service/impl/KafkaStreamServiceImpl.java
-/home/cassandra/Downloads/aggregator/src/thrift-server/src/main/java/com/pollfish/server/LoggingServerApp.java
-/home/cassandra/Downloads/aggregator/src/thrift-server/src/main/java/com/pollfish/server/service/LoggingHandler.java
-/home/cassandra/Downloads/aggregator/src/thrift-server/src/main/java/com/pollfish/server/config/KafkaConfig.java
-/home/cassandra/Downloads/aggregator/src/thrift-server/src/main/java/com/pollfish/server/config/ApplicationProperties.java
-/home/cassandra/Downloads/aggregator/src/thrift-server/src/main/java/com/pollfish/server/config/SimpleServerConfig.java
-/home/cassandra/Downloads/aggregator/src/thrift-server/src/main/java/com/pollfish/server/service/StreamService.java

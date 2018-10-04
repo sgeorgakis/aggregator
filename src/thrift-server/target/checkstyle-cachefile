@@ -1,9 +1,0 @@
-#Thu Oct 04 15:04:32 EEST 2018
-/home/cassandra/Downloads/aggregator/src/thrift-server/src/main/java/com/pollfish/server/config/SimpleServerConfig.java=1538394993000
-/home/cassandra/Downloads/aggregator/src/thrift-server/src/main/java/com/pollfish/server/service/impl/KafkaStreamServiceImpl.java=1538647549000
-/home/cassandra/Downloads/aggregator/src/thrift-server/src/main/java/com/pollfish/server/config/KafkaConfig.java=1538636508000
-/home/cassandra/Downloads/aggregator/src/thrift-server/src/main/java/com/pollfish/server/service/StreamService.java=1538647264000
-/home/cassandra/Downloads/aggregator/src/thrift-server/src/main/java/com/pollfish/server/config/ApplicationProperties.java=1538394993000
-/home/cassandra/Downloads/aggregator/src/thrift-server/src/main/java/com/pollfish/server/LoggingServerApp.java=1538636508000
-/home/cassandra/Downloads/aggregator/src/thrift-server/src/main/java/com/pollfish/server/service/LoggingHandler.java=1538647549000
-configuration*?=C154EC9C14722B0B81CB8BAF0EDB8E900E706B01
