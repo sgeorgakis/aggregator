@@ -1,0 +1,16 @@
+com/pollfish/consumer/web/rest/vm/LoggingEventVM.class
+com/pollfish/consumer/service/dto/LoggingEventDTO.class
+com/pollfish/consumer/config/CassandraConfig.class
+com/pollfish/consumer/service/LoggingEventService.class
+com/pollfish/consumer/config/Constants.class
+com/pollfish/consumer/KafkaConsumerApp.class
+com/pollfish/consumer/service/ConsumerService.class
+com/pollfish/consumer/service/impl/KafkaConsumerServiceImpl.class
+com/pollfish/consumer/domain/LoggingEvent.class
+com/pollfish/consumer/service/impl/LoggingEventServiceImpl.class
+com/pollfish/consumer/config/KafkaConfig.class
+com/pollfish/consumer/service/mapper/LoggingEventMapperImpl.class
+com/pollfish/consumer/web/rest/LoggingEventController.class
+com/pollfish/consumer/service/mapper/LoggingEventMapper.class
+com/pollfish/consumer/repository/LoggingEventRepository.class
+com/pollfish/consumer/service/dto/LevelType.class

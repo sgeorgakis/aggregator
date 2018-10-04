@@ -1,0 +1,9 @@
+com/pollfish/client/service/impl/LoggingEventServiceImpl.class
+com/pollfish/client/service/impl/RandomEventGenerationServiceImpl.class
+com/pollfish/client/config/ApplicationProperties$Server.class
+com/pollfish/client/service/LoggingEventGenerationService.class
+com/pollfish/client/config/ApplicationProperties.class
+com/pollfish/client/config/TTransportConfig.class
+com/pollfish/client/LoggingClientApp.class
+com/pollfish/client/util/RandomEventUtil.class
+com/pollfish/client/service/LoggingEventService.class

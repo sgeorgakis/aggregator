@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="6.11.2">
+<file name="/home/cassandra/Downloads/aggregator/src/thrift-client/src/main/java/com/pollfish/client/LoggingClientApp.java">
+</file>
+<file name="/home/cassandra/Downloads/aggregator/src/thrift-client/src/main/java/com/pollfish/client/config/ApplicationProperties.java">
+</file>
+<file name="/home/cassandra/Downloads/aggregator/src/thrift-client/src/main/java/com/pollfish/client/config/TTransportConfig.java">
+</file>
+<file name="/home/cassandra/Downloads/aggregator/src/thrift-client/src/main/java/com/pollfish/client/util/RandomEventUtil.java">
+</file>
+<file name="/home/cassandra/Downloads/aggregator/src/thrift-client/src/main/java/com/pollfish/client/service/LoggingEventGenerationService.java">
+</file>
+<file name="/home/cassandra/Downloads/aggregator/src/thrift-client/src/main/java/com/pollfish/client/service/impl/LoggingEventServiceImpl.java">
+</file>
+<file name="/home/cassandra/Downloads/aggregator/src/thrift-client/src/main/java/com/pollfish/client/service/impl/RandomEventGenerationServiceImpl.java">
+</file>
+<file name="/home/cassandra/Downloads/aggregator/src/thrift-client/src/main/java/com/pollfish/client/service/LoggingEventService.java">
+</file>
+</checkstyle>

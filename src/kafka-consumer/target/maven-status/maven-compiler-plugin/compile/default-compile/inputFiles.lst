@@ -1,0 +1,15 @@
+/home/cassandra/Downloads/aggregator/src/kafka-consumer/src/main/java/com/pollfish/consumer/service/LoggingEventService.java
+/home/cassandra/Downloads/aggregator/src/kafka-consumer/src/main/java/com/pollfish/consumer/service/dto/LevelType.java
+/home/cassandra/Downloads/aggregator/src/kafka-consumer/src/main/java/com/pollfish/consumer/service/ConsumerService.java
+/home/cassandra/Downloads/aggregator/src/kafka-consumer/src/main/java/com/pollfish/consumer/service/dto/LoggingEventDTO.java
+/home/cassandra/Downloads/aggregator/src/kafka-consumer/src/main/java/com/pollfish/consumer/domain/LoggingEvent.java
+/home/cassandra/Downloads/aggregator/src/kafka-consumer/src/main/java/com/pollfish/consumer/KafkaConsumerApp.java
+/home/cassandra/Downloads/aggregator/src/kafka-consumer/src/main/java/com/pollfish/consumer/web/rest/vm/LoggingEventVM.java
+/home/cassandra/Downloads/aggregator/src/kafka-consumer/src/main/java/com/pollfish/consumer/config/Constants.java
+/home/cassandra/Downloads/aggregator/src/kafka-consumer/src/main/java/com/pollfish/consumer/web/rest/LoggingEventController.java
+/home/cassandra/Downloads/aggregator/src/kafka-consumer/src/main/java/com/pollfish/consumer/repository/LoggingEventRepository.java
+/home/cassandra/Downloads/aggregator/src/kafka-consumer/src/main/java/com/pollfish/consumer/config/KafkaConfig.java
+/home/cassandra/Downloads/aggregator/src/kafka-consumer/src/main/java/com/pollfish/consumer/service/impl/LoggingEventServiceImpl.java
+/home/cassandra/Downloads/aggregator/src/kafka-consumer/src/main/java/com/pollfish/consumer/config/CassandraConfig.java
+/home/cassandra/Downloads/aggregator/src/kafka-consumer/src/main/java/com/pollfish/consumer/service/mapper/LoggingEventMapper.java
+/home/cassandra/Downloads/aggregator/src/kafka-consumer/src/main/java/com/pollfish/consumer/service/impl/KafkaConsumerServiceImpl.java

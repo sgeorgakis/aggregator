@@ -1,0 +1,5 @@
+application:
+  server:
+    ip: localhost
+    port: 9090
+  interval: 1500
