@@ -29,6 +29,11 @@ public class KafkaStreamServiceImpl implements StreamService {
         this.mapper = new ObjectMapper();
     }
 
+    /**
+     * Forwards a {@link LoggingEvent} object to a broker
+     *
+     * @param event the event to forward
+     */
     @Override
     public void forwardLoggingEvent(LoggingEvent event) {
         try {

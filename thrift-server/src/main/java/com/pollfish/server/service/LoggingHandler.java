@@ -17,6 +17,11 @@ public class LoggingHandler implements LoggingService.Iface {
         this.streamService = streamService;
     }
 
+    /**
+     * Receives a {@link LoggingEvent} from a client
+     *
+     * @param event
+     */
     @Override
     public void pushLoggingEvent(LoggingEvent event) {
         streamService.forwardLoggingEvent(event);

@@ -28,6 +28,8 @@ public class LoggingEvent {
 
     private String message;
 
+    private int version;
+
     public String getDatePartition() {
         return datePartition;
     }
@@ -76,6 +78,14 @@ public class LoggingEvent {
         this.message = message;
     }
 
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
+    }
+
     @Override
     public String toString() {
         return "LoggingEvent{"
@@ -84,6 +94,7 @@ public class LoggingEvent {
                 + ", id='" + id + '\''
                 + ", dateCreated=" + dateCreated
                 + ", message='" + message + '\''
+                + ", version='" + version + '\''
                 + '}';
     }
 }

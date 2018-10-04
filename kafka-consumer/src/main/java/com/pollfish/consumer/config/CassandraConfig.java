@@ -3,7 +3,6 @@ package com.pollfish.consumer.config;
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.DataType;
 import com.datastax.driver.core.ProtocolVersion;
-import com.datastax.driver.core.QueryLogger;
 import com.datastax.driver.core.QueryOptions;
 import com.datastax.driver.core.Session;
 import com.datastax.driver.core.SocketOptions;
@@ -76,9 +75,6 @@ public class CassandraConfig {
                 .register(InstantCodec.instance)
                 .register(new ZonedDateTimeCodec(tupleType));
 
-        QueryLogger queryLogger = QueryLogger.builder().build();
-
-        cluster.register(queryLogger);
         return cluster;
     }
 

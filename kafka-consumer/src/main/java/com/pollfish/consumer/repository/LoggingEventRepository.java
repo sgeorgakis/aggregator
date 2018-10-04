@@ -42,10 +42,24 @@ public class LoggingEventRepository {
                 .and(QueryBuilder.eq(LEVEL_COLUMN, QueryBuilder.bindMarker())));
     }
 
+
+    /**
+     * Find all the {@link LoggingEvent} objects in the database
+     *
+     * @return a list containing the {@link LoggingEvent} objects
+     */
     public List<LoggingEvent> findAll() {
         return mapper.map(session.execute(findAllStmt.bind())).all();
     }
 
+    /**
+     * Find {@link LoggingEvent} objects according to datePartition, app and level
+     *
+     * @param datePartition the datePartition
+     * @param app the app generated the {@link LoggingEvent}
+     * @param level the logging level of the event
+     * @return a list containing the {@link LoggingEvent} objects
+     */
     public List<LoggingEvent> findByDatePartitionAndAppAndLevel(String datePartition, int app, String level) {
         return mapper.map(session.execute(findByDatePartitionAndAppAndLevelStmt.bind()
                 .setString(DATE_PARTITION_COLUMN, datePartition)
@@ -53,6 +67,13 @@ public class LoggingEventRepository {
                 .setString(LEVEL_COLUMN, level)))
                 .all();
     }
+
+    /**
+     * Save a {@link LoggingEvent} object
+     *
+     * @param event the {@link LoggingEvent} object
+     * @return the persisted object
+     */
     public LoggingEvent save(LoggingEvent event) {
         Set<ConstraintViolation<LoggingEvent>> violations = validator.validate(event);
         if (violations != null && !violations.isEmpty()) {

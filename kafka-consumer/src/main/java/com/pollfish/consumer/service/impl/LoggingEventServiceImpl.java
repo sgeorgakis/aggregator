@@ -25,19 +25,37 @@ public class LoggingEventServiceImpl implements LoggingEventService {
         this.mapper = mapper;
     }
 
+    /**
+     * Save a {@link LoggingEventDTO} object
+     *
+     * @param eventDTO the {@link LoggingEventDTO} object
+     * @return the persisted object
+     */
     @Override
     public LoggingEventDTO save(LoggingEventDTO eventDTO) {
         LoggingEvent event = mapper.toEntity(eventDTO);
         LOG.info("{}", event);
-        repository.save(mapper.toEntity(eventDTO));
-        return eventDTO;
+        return mapper.toDto(repository.save(mapper.toEntity(eventDTO)));
     }
 
+    /**
+     * Find all the {@link LoggingEventDTO} objects
+     *
+     * @return a list containing the {@link LoggingEventDTO} objects
+     */
     @Override
     public List<LoggingEventDTO> findAll() {
         return mapper.toDto(repository.findAll());
     }
 
+    /**
+     * Find {@link LoggingEventDTO} objects according to date, app and level
+     *
+     * @param date the date (yyyMMdd format)
+     * @param app the app generated the {@link LoggingEventDTO}
+     * @param level the logging level of the event
+     * @return a list containing the {@link LoggingEventDTO} objects
+     */
     @Override
     public List<LoggingEventDTO> findByDayAndAppAndLevel(String date, int app, LevelType level) {
         return mapper.toDto(repository.findByDatePartitionAndAppAndLevel(date, app, level.name()));

@@ -25,6 +25,10 @@ public class KafkaConsumerServiceImpl implements ConsumerService {
         this.mapper = new ObjectMapper();
     }
 
+    /**
+     * Listen for a message to consume
+     * @param message the message
+     */
     @Override
     @KafkaListener(topics = "logging", groupId = "logging-event")
     public void listen(String message) {

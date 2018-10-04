@@ -28,6 +28,16 @@ public class LoggingEventController {
         this.mapper = mapper;
     }
 
+    /**
+     * Get {@link LoggingEventVM} objects.
+     * If any of the request parameter is not present, get all the objects.
+     * If all the parameters are present, get only the matching ones.
+     *
+     * @param date the date of the object in yyyyMMdd format
+     * @param app the app generated the object
+     * @param level the level of logging
+     * @return a list containing all the matching objects
+     */
     @GetMapping("/logging-events")
     public ResponseEntity<List<LoggingEventVM>> getLoggingEvents(@RequestParam(name = "date", required = false) String date,
                                                                  @RequestParam(name = "app", required = false) Integer app,

@@ -10,5 +10,6 @@ CREATE TABLE IF NOT EXISTS logging.logging_event (
   id TEXT,
   date_created TIMESTAMP,
   message TEXT,
+  version int,
   PRIMARY KEY((date_partition, app, level), id)
 );

@@ -13,6 +13,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import static com.pollfish.consumer.config.Constants.DATE_PARTITION_FORMAT;
+
 @Mapper(componentModel = "spring")
 public interface LoggingEventMapper {
 
@@ -35,9 +37,16 @@ public interface LoggingEventMapper {
 
     List<LoggingEventDTO> toDtoList(List<LoggingEventVM> vm);
 
+    /**
+     * Map the datePartition attribute of the {@link LoggingEvent} object
+     * using the time attribute of the {@link LoggingEventDTO} object
+     *
+     * @param entity the {@link LoggingEvent} object
+     * @param dto the {@link LoggingEventDTO} object
+     */
     @AfterMapping
     default void mapToEntity(@MappingTarget LoggingEvent entity, LoggingEventDTO dto) {
-        DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+        DateFormat dateFormat = new SimpleDateFormat(DATE_PARTITION_FORMAT);
         entity.setDatePartition(dateFormat.format(dto.getTime()));
     }
 }

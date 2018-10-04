@@ -27,11 +27,18 @@ public class RandomEventGenerationServiceImpl extends Thread implements LoggingE
         this.shouldRun = true;
     }
 
+    /**
+     * Send events to the server
+     */
     @Override
     public void sendEvents() {
         this.start();
     }
 
+    /**
+     * Generates random events and sends them to the server.
+     * Runs until the shouldRun attribute is set to false.
+     */
     public void run() {
         try {
             while (shouldRun) {
