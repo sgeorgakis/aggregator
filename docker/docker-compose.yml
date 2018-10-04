@@ -7,21 +7,27 @@ services:
       - '2181:2181'
     environment:
       ALLOW_ANONYMOUS_LOGIN: 'yes'
+    networks:
+      - kafka
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:2181"]
       interval: 30s
       timeout: 20s
       retries: 5
 
-#  kafka:
-#    image: bitnami/kafka:latest
-#    environment:
-#      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+  kafka:
+    build:
+      context: ./kafka
+      dockerfile: Dockerfile
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
 #      ALLOW_PLAINTEXT_LISTENER: 'yes'
-#    ports:
-#       - "9092:9092"
-#    depends_on:
-#      - zookeeper
+    networks:
+      - kafka
+    ports:
+       - "9092:9092"
+    depends_on:
+      - zookeeper
 
   cassandra:
     build:
@@ -30,3 +36,6 @@ services:
     ports:
       - '9042:9042'
     command: "sh /opt/init-database.sh"
+
+networks:
+  kafka:
