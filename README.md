@@ -13,7 +13,7 @@ Requirements
 * [Apache Zookeeper 3.4.13](https://www.apache.org/dyn/closer.cgi/zookeeper/) (Optional)
 * [Docker Compose](https://docs.docker.com/compose/install/) (Optional, needs to be installed if Apache Cassandra and Apache Zookeeper are not installed)
 ---
-The system is consisted of 3 modules:
+The system consists of 3 modules:
   * The `thrift-client` module
   * The `thrift-server` module
   * The `kafka-consumer` module
@@ -24,10 +24,23 @@ The only exception is the `thrift-client` module that needs to be connected to `
 ---
 Thrift Client
 ----------------
+The `thrift-client` module is responsible for generating random logging events in a configurable interval
+And forward them to the `thrift-server` module.
+
 Thrift Server
 ----------------
+The `thrift-server` module is responsible for receiving the logging events from the client
+and forwarding them to a topic in `Apache Kafka`.
+
 Kafka Consumer
 ----------------
+The `kafka-consumer` module listens the above-mentioned topic and receives the logging events.
+The events are persisted in `Apache Cassandra`.
+The module exposes a simple REST endpoint to `8080` port in order to validate its functionality.
+The url is `/api/logging-events`.
+Optional request parameters are `date` (*yyyyMMdd* format), `app`, `level`.
+If any of the parameters is missing, the rest are ignored.
+
 Build
 ----------------
 * To build the application, run the `build.sh` script that is located in the `bin` directory.
@@ -39,6 +52,7 @@ In order to achieve the automatic creation of the necessary schema in `Apache Ca
 a custom image was created.
 
 **Please note that there is no `Apache Kafka` image provided and you should install it locally.**
+(See [Thoughts](thoughts))
 
 Test
 ----------------
@@ -52,12 +66,12 @@ The `Apache Zookeeper` instance is available at port `2181`.
 The `Apache Cassandra` instance is available at port `9042`.
 
 2. To start the `kafka-consumer` module, run the `start-consumer.sh` script located in the `bin` folder.
-The consumer expects an `Apache Cassandra` and a `Apache Kafka` instances to be available at ports `9042` and `9092` respectively.
+The consumer expects an `Apache Cassandra` and a `Apache Kafka` instance to be available at ports `9042` and `9092` respectively.
 The module will also bind the `8080` port.
 
 
 3. To start the `thrift-server` module, run the `start-server.sh` script located in the `bin` folder.
-The server expects an `Apache Kafka` instance to be available at port `9092`, although it will not fail to start if there is not.
+The server expects an `Apache Kafka` instance to be available at port `9092`, although it will not fail to start if that is not the case.
 The module will bind the `9090` port.
 
 4. To start the`thrift-client` module, run the `start-client.sh` script located in the `bin` folder.
@@ -81,14 +95,14 @@ The following table shows the correlation of the files with the module.
 Project Info
 ----------------
 All the modules are based on the `Spring Boot 1.5.3` framework.
-Although there was not such need at least for the `thrift-client` and `thrift-server` modules,
+Although there was no such need at least for the `thrift-client` and `thrift-server` modules,
 I used it to explore its (and `Spring` framework's) integration with `Apache Thrift`, `Apache Kafka` and to utilize its functionalities.
 
-The `kafka-consumer` module follows an `n-tier` architecture as it can be described as a `web application`.
-Each layer has its own object, although they have great similarities.
+The `kafka-consumer` module follows an `n-tier` architecture.
+Each layer has its own object, although they have great similarities, in order to achieve complete decoupling between the layers.
 
 Due to their simplicity, `thrift-client` and `thrift-server` do not follow an `n-tier` architecture,
-as their roles limit to creation/reception of logging events and forward the to the next system.
+as their roles are limited to respectively creating/receiving of logging events and forwarding them to the next system.
 
 ### Logging Event
 The logging event entity has the following fields:
@@ -102,7 +116,7 @@ The logging event entity has the following fields:
 |level|enum  |the logging leve of the event (*TRACE, DEBUG, INFO, WARN, ERROR, CRITICAL*)|
 |app  |i16   |a unique identifier for the application that created the event             |
 
-The above fields were created in respect with the specifications
+The above fields were created in respect to the specifications
 and assuming that the logging events are generated from various clients (app)
 and contain information about their health or execution.
 
@@ -121,20 +135,22 @@ For the persistence of the logging events, only the following table was created
 |version       | INT      |
 
 The Partition key is consisted of the `date_partition`, `app` and `level` fields, while the id is a clustering column.
-Although most of the fields are self explanatory in respect with the logging event entity, the `date_partition` needs more explanation.
+Although most of the fields are self explanatory in respect to the logging event entity, the `date_partition` needs more explanation.
 
 The `date_partition` field is created by the creation date of the logging event and is a string representation if *yyyMMdd* format.
 
-The thought behind this design is the following:
-Assumming that the system aggregates logs from various applications, I as a user will be able to fetch the logs of a specific app, in a specific day (thus the `date_partition` field) and only for a specific level (e.g. ERROR).
+The reasoning behind this design is the following:
+Assuming that the system aggregates logs from various applications, I as a user will be able to fetch the logs of a specific app, in a specific day (thus the `date_partition` field) and only for a specific level (e.g. ERROR).
 
-Thoughts
+[Thoughts](#thoughts)
 ----------------
 
 As mentioned above, only `Apache Cassandra` and `Apache Zookeeper` are provided as docker services.
-The user has to install localy `Apache Kafka` in order to run the system.
+The user has to install `Apache Kafka` locally in order to run the system.
 Although there are many images for the `Apache Kafka` and many tutorials on how to use it,
 there is no official image and I have found that none of the existing ones functioned properly with the system.
-The main problem seems to be in the communication of the `thrift-server` and `kafka-consumer` modules with `Apache Kafka`, but I was not able to specify it.
-After that, I considered creating my own image using the official `openjdk:8-jre` image as base,
-but my knowledge on docker is limited and it would require much effort to achieve it.
+The main problem seems to be in the communication of the `thrift-server` and `kafka-consumer` modules with `Apache Kafka`.
+After dedicating a lot of time trying to determine the problem,
+I decided it would be better to find a different solution in order to continue the implementation of the excersice.
+My first thought was to create my own image using the official `openjdk:8-jre` image as base,
+but my knowledge on docker is limited and I felt it would take me longer than is reasonable.
