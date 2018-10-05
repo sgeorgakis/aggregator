@@ -2,10 +2,9 @@ package com.pollfish.client.service.impl;
 
 import com.pollfish.client.config.ApplicationProperties;
 import com.pollfish.client.service.LoggingEventGenerationService;
+import com.pollfish.client.service.LoggingEventHandlerService;
 import com.pollfish.client.util.RandomEventUtil;
 import com.pollfish.core.LoggingEvent;
-import com.pollfish.core.LoggingService;
-import org.apache.thrift.TException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -17,14 +16,14 @@ public class RandomEventGenerationServiceImpl extends Thread implements LoggingE
 
     private static final Logger LOG = LoggerFactory.getLogger(RandomEventGenerationServiceImpl.class);
 
-    private final LoggingService.Client client;
     private final ApplicationProperties applicationProperties;
+    private final LoggingEventHandlerService loggingEventHandlerService;
 
     private boolean shouldRun;
 
-    public RandomEventGenerationServiceImpl(LoggingService.Client client, ApplicationProperties applicationProperties) {
-        this.client = client;
+    public RandomEventGenerationServiceImpl(ApplicationProperties applicationProperties, LoggingEventHandlerService loggingEventHandlerService) {
         this.applicationProperties = applicationProperties;
+        this.loggingEventHandlerService = loggingEventHandlerService;
         this.shouldRun = true;
     }
 
@@ -41,21 +40,18 @@ public class RandomEventGenerationServiceImpl extends Thread implements LoggingE
      * Runs until the shouldRun attribute is set to false.
      */
     public void run() {
-        try {
-            while (shouldRun) {
+        while (shouldRun) {
+            try {
                 LoggingEvent event = RandomEventUtil.generateRandomEvent();
-                client.pushLoggingEvent(event);
-                LOG.info("Sent event to server: {}", event);
+                boolean wasSent = loggingEventHandlerService.sendLoggingEvent(event);
+                if (wasSent) {
+                    LOG.info("Sent event to server: {}", event);
+                }
                 Thread.sleep(applicationProperties.getInterval());
+            } catch (InterruptedException e) {
+                LOG.error("Thread interrupted");
+                LOG.error(e.getMessage());
             }
-        } catch (InterruptedException e) {
-            LOG.error("Thread interrupted");
-            LOG.error(e.getMessage());
-            Thread.currentThread().interrupt();
-        } catch (TException e) {
-            LOG.error("Thread interrupted by client exception");
-            LOG.error(e.getMessage());
-            Thread.currentThread().interrupt();
         }
     }
 
