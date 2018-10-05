@@ -5,8 +5,6 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>thrift-server</artifactId>
-    <packaging>jar</packaging>
-    <name>thrift-server</name>
 
     <parent>
         <groupId>com.pollfish</groupId>

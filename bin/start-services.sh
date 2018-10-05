@@ -1,4 +1,6 @@
 #!/bin/sh
 
-cd ../src/docker
+cd "$(dirname "$0")"
+
+cd ../lib/docker
 docker-compose up

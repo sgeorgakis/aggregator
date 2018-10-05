@@ -95,7 +95,7 @@ The user can change various properties using the above files, like the ports of 
 the IP/port where external services are available etc.
 
 To change the properties of the services themselves (when utilizing the `Docker` containers)
-you must edit the `docker-compose.yml` file located in the `lib` directory.
+you must edit the `docker-compose.yml` file located in the `lib/docker` directory.
 
 Project Info
 ----------------
