@@ -18,5 +18,3 @@ spring:
 application:
   server:
     port: 9090
-  kafka:
-    topic: logging

@@ -14,6 +14,8 @@ import java.io.IOException;
 @Service
 public class KafkaConsumerServiceImpl implements ConsumerService {
 
+    private static final String TOPIC = "logging";
+    private static final String GROUP_ID = "logging-event";
     private static final Logger LOG = LoggerFactory.getLogger(KafkaConsumerServiceImpl.class);
 
     private final LoggingEventService loggingEventService;
@@ -30,7 +32,7 @@ public class KafkaConsumerServiceImpl implements ConsumerService {
      * @param message the message
      */
     @Override
-    @KafkaListener(topics = "logging", groupId = "logging-event")
+    @KafkaListener(topics = TOPIC, groupId = GROUP_ID)
     public void listen(String message) {
         try {
             LoggingEventDTO eventDTO = mapper.readValue(message, LoggingEventDTO.class);

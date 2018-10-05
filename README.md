@@ -192,3 +192,6 @@ but my knowledge on `Docker` is limited and I felt it would take me longer than 
 Due to lack of familiarization with the `Apache Thrift` and `Apache Kafka` frameworks,
 I believe that best practices were not followed.
 Nevertheless, this exercise gave me the oportunity to explore and experiment with these technologies.
+
+I decided to use the simple server implementation `Apache Thrift` offers and do not focus on security issues in any module or service configuration
+to focus more in the assignment implementation.

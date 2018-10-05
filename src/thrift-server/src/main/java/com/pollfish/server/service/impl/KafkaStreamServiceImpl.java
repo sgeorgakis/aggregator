@@ -16,6 +16,7 @@ import org.springframework.util.concurrent.ListenableFutureCallback;
 @Service
 public class KafkaStreamServiceImpl implements StreamService {
 
+    private static final String TOPIC = "logging";
     private static final Logger LOG = LoggerFactory.getLogger(KafkaStreamServiceImpl.class);
 
     private final KafkaTemplate<String, String> kafkaTemplate;
@@ -38,7 +39,7 @@ public class KafkaStreamServiceImpl implements StreamService {
     public void forwardLoggingEvent(LoggingEvent event) {
         try {
             String message = mapper.writeValueAsString(event);
-            ListenableFuture<SendResult<String, String>> result = kafkaTemplate.send(applicationProperties.getKafka().getTopic(), message);
+            ListenableFuture<SendResult<String, String>> result = kafkaTemplate.send(TOPIC, message);
             result.addCallback(new ListenableFutureCallback<SendResult<String, String>>() {
                 @Override
                 public void onSuccess(SendResult<String, String> result) {

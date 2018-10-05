@@ -7,14 +7,8 @@ public class ApplicationProperties {
 
     private final Server server = new Server();
 
-    private final Kafka kafka = new Kafka();
-
     public Server getServer() {
         return server;
-    }
-
-    public Kafka getKafka() {
-        return kafka;
     }
 
     public static class Server {
@@ -27,19 +21,6 @@ public class ApplicationProperties {
 
         public void setPort(int port) {
             this.port = port;
-        }
-    }
-
-    public static class Kafka {
-
-        private String topic = "logging";
-
-        public String getTopic() {
-            return topic;
-        }
-
-        public void setTopic(String topic) {
-            this.topic = topic;
         }
     }
 }
