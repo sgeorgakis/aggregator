@@ -25,7 +25,9 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 @TestPropertySource("classpath:config/application.yml")
 public class LoggingClientIntTest {
 
-    private static final Logger LOG = LoggerFactory.getLogger(LoggingClientApp.class);
+    private static final Logger LOG = LoggerFactory.getLogger(LoggingClientIntTest.class);
+
+    private Thread serverThread;
 
     @Autowired
     LoggingEventService loggingEventService;
@@ -37,15 +39,16 @@ public class LoggingClientIntTest {
 
     @Before
     public void init() {
-
         handler = new MockHandler();
         LoggingService.Processor processor = new LoggingService.Processor(handler);
         Runnable simple = () -> simple(processor);
-        new Thread(simple).start();
+        serverThread = new Thread(simple);
     }
 
     @Test
     public void successfullySendLoggingEventTest() {
+        // Start the server
+        serverThread.start();
 
         // Send event from client
         loggingEventService.startSendingLoggingEvents();
@@ -53,6 +56,14 @@ public class LoggingClientIntTest {
         // Verify that the server received it
         assertThat(handler.getEvent()).isNotNull();
         LOG.info("Event received.");
+    }
+
+    @Test
+    public void tryToSendWhileServerIsDownTest() {
+
+        // Send event from client
+        // If the exceptions are handled correctly, the test will finish without errors
+        loggingEventService.startSendingLoggingEvents();
     }
 
     private void simple(LoggingService.Processor processor) {
@@ -64,4 +75,6 @@ public class LoggingClientIntTest {
             LOG.error(e.getMessage());
         }
     }
+
+
 }
