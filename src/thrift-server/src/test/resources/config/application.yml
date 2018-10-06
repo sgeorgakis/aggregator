@@ -1,0 +1,20 @@
+info:
+  project:
+    version: #project.version#
+
+spring:
+  application:
+    name: thrift-server
+  kafka:
+    bootstrap-servers: ${spring.embedded.kafka.brokers}
+    producer:
+      batchSize: 3
+  main:
+    web-environment: false
+
+#===============================================
+# Application specific properties
+#===============================================
+application:
+  server:
+    port: 9090
