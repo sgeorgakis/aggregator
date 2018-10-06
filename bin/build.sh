@@ -6,7 +6,6 @@ cd "$(dirname "$0")"
 cd ../src
 
 mvn clean package -DskipTests
-mkdir -p ../lib
 
 mv kafka-consumer/target/kafka-consumer-$VERSION.jar ../lib/
 rm -r kafka-consumer/target
