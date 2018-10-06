@@ -1,0 +1,18 @@
+info:
+  project:
+    version: #project.version#
+
+spring:
+  application:
+    name: thrift-client
+  main:
+    web-environment: false
+
+#===============================================
+# Application specific properties
+#===============================================
+application:
+  server:
+    ip: localhost
+    port: 9090
+  interval: 100
