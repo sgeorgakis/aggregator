@@ -7,6 +7,8 @@ spring:
     name: thrift-client
   main:
     web-environment: false
+  profiles:
+      active: test
 
 #===============================================
 # Application specific properties

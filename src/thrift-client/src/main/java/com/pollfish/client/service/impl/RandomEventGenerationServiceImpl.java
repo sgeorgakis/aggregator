@@ -1,17 +1,20 @@
 package com.pollfish.client.service.impl;
 
 import com.pollfish.client.config.ApplicationProperties;
+import com.pollfish.client.config.Constants;
 import com.pollfish.client.service.LoggingEventGenerationService;
 import com.pollfish.client.service.LoggingEventHandlerService;
 import com.pollfish.client.util.RandomEventUtil;
 import com.pollfish.core.LoggingEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PreDestroy;
 
 @Service
+@Profile(Constants.DEV_PROFILE)
 public class RandomEventGenerationServiceImpl extends Thread implements LoggingEventGenerationService {
 
     private static final Logger LOG = LoggerFactory.getLogger(RandomEventGenerationServiceImpl.class);

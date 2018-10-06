@@ -7,14 +7,13 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 @Service
-@Profile(Constants.DEV_PROFILE)
-public class LoggingEventServiceImpl implements LoggingEventService {
+@Profile(Constants.TEST_PROFILE)
+public class LoggingEventTestServiceImpl implements LoggingEventService {
 
     private final LoggingEventGenerationService loggingEventGenerationService;
 
-    public LoggingEventServiceImpl(LoggingEventGenerationService loggingEventGenerationService) {
+    public LoggingEventTestServiceImpl(LoggingEventGenerationService loggingEventGenerationService) {
         this.loggingEventGenerationService = loggingEventGenerationService;
-        startSendingLoggingEvents();
     }
 
     @Override

@@ -1,10 +1,7 @@
 package com.pollfish.client;
 
 import com.pollfish.client.config.ApplicationProperties;
-import com.pollfish.client.service.LoggingEventHandlerService;
 import com.pollfish.client.service.LoggingEventService;
-import com.pollfish.client.util.RandomEventUtil;
-import com.pollfish.core.LoggingEvent;
 import com.pollfish.core.LoggingService;
 import org.apache.thrift.server.TServer;
 import org.apache.thrift.server.TSimpleServer;
@@ -18,7 +15,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -31,11 +27,8 @@ public class LoggingClientIntTest {
 
     private static final Logger LOG = LoggerFactory.getLogger(LoggingClientApp.class);
 
-    @MockBean
-    LoggingEventService loggingEventService;
-
     @Autowired
-    private LoggingEventHandlerService loggingEventHandlerService;
+    LoggingEventService loggingEventService;
 
     @Autowired
     private ApplicationProperties applicationProperties;
@@ -55,11 +48,10 @@ public class LoggingClientIntTest {
     public void successfullySendLoggingEventTest() {
 
         // Send event from client
-        LoggingEvent event = RandomEventUtil.generateRandomEvent();
-        loggingEventHandlerService.sendLoggingEvent(event);
+        loggingEventService.startSendingLoggingEvents();
 
         // Verify that the server received it
-        assertThat(handler.getEvent()).isEqualTo(event);
+        assertThat(handler.getEvent()).isNotNull();
         LOG.info("Event received.");
     }
 
