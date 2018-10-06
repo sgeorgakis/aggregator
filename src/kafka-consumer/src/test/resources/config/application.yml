@@ -1,0 +1,17 @@
+info:
+  project:
+    version: #project.version#
+
+spring:
+  application:
+    name: kafka-consumer
+  data:
+    cassandra:
+      contactPoints: localhost
+      port: 9142
+      protocolVersion: V4
+      compression: LZ4
+      keyspaceName: logging
+  kafka:
+    bootstrap-servers: ${spring.embedded.kafka.brokers}
+    consumer.group-id: logging-event

@@ -8,12 +8,12 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan
-public class KafkaConsumerApp {
+public class LoggingConsumerApp {
 
-    private static final Logger LOG = LoggerFactory.getLogger(KafkaConsumerApp.class);
+    private static final Logger LOG = LoggerFactory.getLogger(LoggingConsumerApp.class);
 
     public static void main(String[] args) {
-        LOG.info("Starting Kafka Consumer");
-        SpringApplication.run(KafkaConsumerApp.class, args);
+        LOG.info("Starting Logging Consumer");
+        SpringApplication.run(LoggingConsumerApp.class, args);
     }
 }
