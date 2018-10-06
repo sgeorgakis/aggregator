@@ -65,7 +65,7 @@ public class LoggingServerIntTest {
     private LoggingHandler handler;
 
     @Autowired
-    StreamService streamService;
+    private StreamService streamService;
 
     private LoggingService.Client client;
 
@@ -80,7 +80,7 @@ public class LoggingServerIntTest {
     }
 
     @Test
-    public void receivedAndForwardedLoggingEvent() throws Exception {
+    public void receivedAndForwardedLoggingEventTest() throws Exception {
 
         ArgumentCaptor<LoggingEvent> captor = ArgumentCaptor.forClass(LoggingEvent.class);
 
@@ -142,7 +142,7 @@ public class LoggingServerIntTest {
         client = new LoggingService.Client(protocol);
     }
 
-    private void initKafkaConsumer() throws Exception{
+    private void initKafkaConsumer() throws Exception {
 
         // set up the Kafka consumer properties
         Map<String, Object> consumerProperties =
