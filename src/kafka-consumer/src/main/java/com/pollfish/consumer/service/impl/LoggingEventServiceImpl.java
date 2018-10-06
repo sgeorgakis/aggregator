@@ -34,7 +34,7 @@ public class LoggingEventServiceImpl implements LoggingEventService {
     @Override
     public LoggingEventDTO save(LoggingEventDTO eventDTO) {
         LoggingEvent event = mapper.toEntity(eventDTO);
-        return mapper.toDto(repository.save(mapper.toEntity(eventDTO)));
+        return mapper.toDto(repository.save(event));
     }
 
     /**
