@@ -24,36 +24,29 @@ public class LoggingEventHandlerServiceImpl implements LoggingEventHandlerServic
     private final ApplicationProperties applicationProperties;
 
     private LoggingService.Client client;
-    private TTransport transport;
 
     public LoggingEventHandlerServiceImpl(ApplicationProperties applicationProperties) {
         this.applicationProperties = applicationProperties;
-        openConnection();
     }
 
     @Override
     public boolean sendLoggingEvent(LoggingEvent event) {
-        if (!transport.isOpen()) {
-            openConnection();
-        }
+        boolean wasSent;
+        connectClient();
         try {
             client.pushLoggingEvent(event);
-            return true;
+            wasSent = true;
         } catch (TException e) {
             LOG.error("A server exception occurred");
             LOG.error(e.getMessage());
-            transport.close();
-            return false;
+            wasSent = false;
         }
+        closeTransport();
+        return wasSent;
     }
 
-    private void openConnection() {
-        openTransport();
-        connectClient();
-    }
-
-    private void openTransport() {
-        transport = null;
+    private void connectClient() {
+        TTransport transport = null;
         try {
             String ip = applicationProperties.getServer().getIp();
             int port = applicationProperties.getServer().getPort();
@@ -63,18 +56,20 @@ public class LoggingEventHandlerServiceImpl implements LoggingEventHandlerServic
         } catch (TTransportException e) {
             LOG.error(e.getMessage());
         }
-    }
-
-    private  void connectClient() {
         TProtocol protocol = new TBinaryProtocol(transport);
         client = new LoggingService.Client(protocol);
     }
 
+
     @PreDestroy
-    public void destroy() {
-        if (transport != null) {
-            LOG.debug("Closing transport");
-            transport.close();
+    public void closeTransport() {
+        if (client.getInputProtocol().getTransport().isOpen()) {
+            LOG.debug("Closing input transport");
+            client.getInputProtocol().getTransport().close();
+        }
+        if (client.getOutputProtocol().getTransport().isOpen()) {
+            LOG.debug("Closing input transport");
+            client.getOutputProtocol().getTransport().close();
         }
     }
 }
