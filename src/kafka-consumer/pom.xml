@@ -14,6 +14,7 @@
 
     <properties>
         <checkstyle.configuration.path>cs/checkstyle.xml</checkstyle.configuration.path>
+        <cassandra-driver.version>3.5.0</cassandra-driver.version>
     </properties>
 
     <dependencies>
