@@ -2,7 +2,7 @@ package com.pollfish.server.service;
 
 import com.pollfish.core.LoggingEvent;
 
-public interface StreamService {
+public interface ProducerService {
 
     /**
      * Forwards a {@link LoggingEvent} object to a broker

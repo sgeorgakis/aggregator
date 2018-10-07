@@ -11,10 +11,10 @@ public class LoggingHandler implements LoggingService.Iface {
 
     private static final Logger LOG = LoggerFactory.getLogger(LoggingHandler.class);
 
-    private final StreamService streamService;
+    private final ProducerService producerService;
 
-    public LoggingHandler(StreamService streamService) {
-        this.streamService = streamService;
+    public LoggingHandler(ProducerService producerService) {
+        this.producerService = producerService;
     }
 
     /**
@@ -25,6 +25,6 @@ public class LoggingHandler implements LoggingService.Iface {
     @Override
     public void pushLoggingEvent(LoggingEvent event) {
         LOG.info("Received event: {}. Forwarding to broker.", event);
-        streamService.forwardLoggingEvent(event);
+        producerService.forwardLoggingEvent(event);
     }
 }

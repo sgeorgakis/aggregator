@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pollfish.core.LoggingEvent;
 import com.pollfish.server.config.ApplicationProperties;
-import com.pollfish.server.service.StreamService;
+import com.pollfish.server.service.ProducerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -14,17 +14,17 @@ import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 
 @Service
-public class KafkaStreamServiceImpl implements StreamService {
+public class KafkaProducerServiceImpl implements ProducerService {
 
     private static final String TOPIC = "logging";
-    private static final Logger LOG = LoggerFactory.getLogger(KafkaStreamServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(KafkaProducerServiceImpl.class);
 
     private final KafkaTemplate<String, String> kafkaTemplate;
     private final ApplicationProperties applicationProperties;
 
     private ObjectMapper mapper;
 
-    public KafkaStreamServiceImpl(KafkaTemplate<String, String> kafkaTemplate, ApplicationProperties applicationProperties) {
+    public KafkaProducerServiceImpl(KafkaTemplate<String, String> kafkaTemplate, ApplicationProperties applicationProperties) {
         this.kafkaTemplate = kafkaTemplate;
         this.applicationProperties = applicationProperties;
         this.mapper = new ObjectMapper();

@@ -7,7 +7,7 @@ import com.pollfish.core.LoggingEvent;
 import com.pollfish.core.LoggingService;
 import com.pollfish.server.config.ApplicationProperties;
 import com.pollfish.server.service.LoggingHandler;
-import com.pollfish.server.service.StreamService;
+import com.pollfish.server.service.ProducerService;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TProtocol;
@@ -65,7 +65,7 @@ public class LoggingServerIntTest {
     private LoggingHandler handler;
 
     @Autowired
-    private StreamService streamService;
+    private ProducerService producerService;
 
     private LoggingService.Client client;
 
@@ -97,7 +97,7 @@ public class LoggingServerIntTest {
 
         // Since the handler is being mocked
         // manual forwarding to the stream service must be performed
-        streamService.forwardLoggingEvent(event);
+        producerService.forwardLoggingEvent(event);
 
         // Verify that event was forwarded to Kafka
         ConsumerRecord<String, String> receivedRecord = records.poll(10, TimeUnit.SECONDS);
