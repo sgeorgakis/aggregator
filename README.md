@@ -42,7 +42,6 @@ If any of the parameters is missing, the rest are ignored.
 
 Build
 ----------------
----
 * To build the application, run the `build.sh` script that is located in the `bin` directory.
 This will create the `lib` folder in the parent folder that will contain all the necessary jar files.
 
@@ -56,12 +55,10 @@ a custom image was created.
 
 Test
 ----------------
----
 To run the integration tests of the project, run the `test.sh` script located in the `bin` directory.
 
 Run
 ----------------
----
 1. To run the `Docker` images, execute the `start-services.sh` script located in the `bin` folder.
 The necessary schema and tables for the `Apache Cassandra` are automatically created at startup.
 The `Apache Zookeeper` instance is available at port `2181`.
@@ -84,7 +81,6 @@ The client expects the `thrift-server` module to be running and will try to conn
 
 Configuration
 ----------------
----
 The configuration files are located in the `conf` folder.
 
 The following table shows the correlation of the files with the module.
@@ -103,7 +99,6 @@ you must edit the `docker-compose.yml` file located in the `lib/docker` director
 
 Project Info
 ----------------
----
 All the modules are based on the `Spring Boot 1.5.3` framework.
 Although there was no such need, at least for the `thrift-client` and `thrift-server` modules,
 I used it to explore the `Spring` integration with `Apache Thrift` and `Apache Kafka` and to utilize its functionalities.
@@ -193,7 +188,6 @@ A simple producer implementation is used to generate the logging events and it i
 
 Thoughts
 ----------------
----
 ### Docker
 `Docker` containers were utilized in order to easily achieve a reproducible environment.
 
