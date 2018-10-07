@@ -11,6 +11,8 @@ spring:
       batchSize: 3
   main:
     web-environment: false
+  profiles:
+    active: test
 
 #===============================================
 # Application specific properties
